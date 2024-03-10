@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jesus Christ is the Real King</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    #numbers {
+        font-size: 24px;
+        position: relative;
+        margin: 50px 0;
+    }
+
+    .number {
+        margin: 5px 0;
+    }
+    
+    #containerDescription {
+        position: fixed;
+        top: 50%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+</head>
+<body>
+<div id="numbers"></div>
+<div id="containerDescription">
+    Salve Maria! Every number has a potential to increase or decrease, so they're not infinite. Only God is Infinite.
+
+    <p>
+        Ad maiorem Dei gloriam.
+    </p>
+</div>
+
+
+<script>
+    let container = document.getElementById('numbers');
+
+    function generateMoreNumbersDown() {
+        let lastNumber = Number(container.lastChild.textContent);
+        for (let i = lastNumber + 1; i <= lastNumber + 100; i++) {
+            let newNumber = document.createElement('div');
+            newNumber.textContent = i;
+            newNumber.classList.add('number');
+            container.appendChild(newNumber);
+        }
+    }
+
+    function generateMoreNumbersUp() {
+        let firstNumber = Number(container.firstChild.textContent);
+        for (let i = firstNumber - 1; i >= firstNumber - 100; i--) {
+            let newNumber = document.createElement('div');
+            newNumber.textContent = i;
+            newNumber.classList.add('number');
+            container.insertBefore(newNumber, container.firstChild);
+        }
+    }
+
+    function updateNumbersOnScroll() {
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+        if (scrollTop + window.innerHeight >= document.documentElement.scrollHeight) {
+            generateMoreNumbersDown();
+        }
+
+        if (scrollTop === 0) {
+            generateMoreNumbersUp();
+            window.scrollBy(0, 100); // Maintain scroll position
+        }
+    }
+
+    window.addEventListener('load', function() {
+        for (let i = -50; i <= 50; i++) {
+            let newNumber = document.createElement('div');
+            newNumber.textContent = i;
+            newNumber.classList.add('number');
+            container.appendChild(newNumber);
+        }
+
+        window.scrollBy(0, 1300);
+    });
+
+    window.addEventListener('scroll', updateNumbersOnScroll);
+</script>
+</body>
+</html>
